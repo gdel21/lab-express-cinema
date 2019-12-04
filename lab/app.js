@@ -8,6 +8,8 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
+const session      = require("express-session");
+const MongoStore   = require("connect-mongo")(session);
 
 
 mongoose
@@ -49,7 +51,16 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
 
+app.use(session({
+  secret: "asasdasas",
+  cookie: { maxAge: 60000 },
+  store: new MongoStore({mongooseConnection: mongoose.connection, ttl: 24 * 60 * 60 })
+}));
 
+app.use((req, res, next)=>{
+  res.locals.user = req.session.currentUser;
+  next();
+})
 
 const index = require('./routes/index');
 const users = require('./routes/user-routes');
