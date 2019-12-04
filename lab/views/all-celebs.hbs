@@ -1,0 +1,20 @@
+<h1>Celeb</h1>
+
+{{#each theCeleb}}
+
+<div class="celeb-info">
+    {{!-- <img src="{{this.image}}" style="width: 100px"> --}}
+
+    <a href="/celebs/{{this._id}}">
+        <h2>
+            {{this.name}}
+        </h2>
+    </a>
+
+
+    <h5>{{this.occupation}}</h5>
+
+</div>
+
+
+{{/each}}
