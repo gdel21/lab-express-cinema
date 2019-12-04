@@ -1,0 +1,23 @@
+<div class="add-celeb-page">
+<h2>Edit {{celeb.name}}</h2>
+
+<form action="/celebs/{{celeb.id}}/postedit" method="POST">
+
+<h1>Title<h1>
+<input type="text" name="name" value="{{celeb.name}}"/>
+
+<h1>Occupation<h1>
+<input type="text" name="occupation" value="{{celeb.occupation}}"/>
+
+{{!-- <h1>Image URL<h1>
+<input type="text" name="img" /> --}}
+
+<h1>Catchphrase<h1>
+<input type="text" name="catchphrase" value="{{celeb.catchphrase}}"/>
+<br />
+
+<button class="button">Save!</button>
+
+</form>
+
+</div>

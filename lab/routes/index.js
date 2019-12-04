@@ -29,6 +29,28 @@ router.get('/allCelebs', (req, res, next) => {
   })
 });
 
+router.post('/movies/:id/delete',(req,res,next)=>{
+  const theId = req.params.id
+  Movie.findByIdAndRemove(theId)
+  .then(response=>{
+    res.redirect('/allmovies')
+  })
+  .catch((err)=>{
+    next(err)
+  })
+})
+
+router.post('/celebs/:id/delete',(req,res,next)=>{
+  const theId = req.params.id
+  Celeb.findByIdAndRemove(theId)
+  .then(response=>{
+    res.redirect('/allcelebs')
+  })
+  .catch((err)=>{
+    next(err)
+  })
+})
+
 
 router.get('/add-new-movie', (req, res, next)=>{
   res.render('new-movie');
@@ -42,7 +64,7 @@ router.get('/add-new-celeb', (req, res, next)=>{
 router.post('/create-the-movie', (req, res, next)=>{
   let theTitle = req.body.theNewMovieTitle;
   let auth = req.body.theDirectorForNewMovie;
-  let img = req.body.img;
+  let img = req.body.image;
   let info = req.body.info;
 
 
@@ -72,7 +94,7 @@ router.post('/create-the-celeb', (req, res, next)=>{
     catchphrase: catchphrase
   })
   .then((response)=>{
-    res.redirect('/')
+    res.redirect('/allcelebs')
   })
   .catch((err)=>{
     next(err)
@@ -103,6 +125,50 @@ router.get('/celebs/:theIdOfTheCeleb', (req, res, next)=>{
   })
   .catch((err)=>{
     next(err);
+  })
+})
+
+router.get('/celebs/:id/edit',(req,res,next)=>{
+  let id = req.params.id;
+
+  Celeb.findById(id)
+  .then((theCeleb)=>{
+    console.log(theCeleb)
+    res.render('edit-celeb', {celeb: theCeleb})
+  })
+})
+
+router.post('/celebs/:id/postedit', (req,res,next)=>{
+  theID = req.params.id
+
+  Celeb.findByIdAndUpdate(theID, req.body)
+  .then((asd)=>{
+    res.redirect('/celebs/'+ theID)
+  })
+  .catch((err)=>{
+    next(err)
+  })
+})
+
+router.get('/movies/:id/edit',(req,res,next)=>{
+  let id = req.params.id;
+
+  Movie.findById(id)
+  .then((theMovie)=>{
+    console.log(theMovie)
+    res.render('edit-movie', {movie: theMovie})
+  })
+})
+
+router.post('/movies/:id/postedit', (req,res,next)=>{
+  theID = req.params.id
+
+  Movie.findByIdAndUpdate(theID, req.body)
+  .then((asd)=>{
+    res.redirect('/movies/'+ theID)
+  })
+  .catch((err)=>{
+    next(err)
   })
 })
 

@@ -1,0 +1,23 @@
+<div class="add-movie-page">
+<h2>Edit {{movie.name}}</h2>
+
+<form action="/movies/{{movie.id}}/postedit" method="POST">
+
+<h1>Title<h1>
+<input type="text" name="title" value="{{movie.title}}"/>
+
+<h1>Director<h1>
+<input type="text" name="director" value="{{movie.director}}"/>
+
+<h1>Image URL<h1>
+<input type="text" name="image" value="{{movie.image}}"/>
+
+<h1>Info<h1>
+<input type="text" name="info" value="{{movie.info}}"/>
+<br />
+
+<button class="button">Save!</button>
+
+</form>
+
+</div>

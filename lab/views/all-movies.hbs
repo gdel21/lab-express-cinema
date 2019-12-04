@@ -14,6 +14,14 @@
 
     <h5>By: {{this.director}}</h5>
 
+     <form action="/movies/{{this.id}}/delete" method="POST">
+      <button class="button">Delete</button>
+    </form>
+
+    <form action="/movies/{{this.id}}/edit" method="GET">
+      <button class="button">Edit</button>
+    </form>
+
 </div>
 
 

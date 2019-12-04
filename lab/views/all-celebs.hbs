@@ -10,9 +10,14 @@
             {{this.name}}
         </h2>
     </a>
-
-
     <h5>{{this.occupation}}</h5>
+    <form action="/celebs/{{this.id}}/delete" method="POST">
+      <button class="button">Delete</button>
+    </form>
+
+    <form action="/celebs/{{this.id}}/edit" method="GET">
+      <button class="button">Edit</button>
+    </form>
 
 </div>
 
